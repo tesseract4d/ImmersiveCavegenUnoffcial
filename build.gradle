@@ -5,3 +5,10 @@ plugins {
 }
 
 version = 1.0
+
+
+jar {
+    manifest {
+        attributes 'FMLAT': 'immersivecavegen_at.cfg'
+    }
+}

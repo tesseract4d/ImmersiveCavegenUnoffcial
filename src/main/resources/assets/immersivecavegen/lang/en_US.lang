@@ -1,0 +1,91 @@
+item.ItemStalactiteDagger.name=Stalactite Dagger
+item.ItemStalagmiteDagger.name=Stalagmite Dagger
+item.SpawnSmallBrownSpider.name=Spawn Small Brown Spider
+item.SpawnBrownSpider.name=Spawn Brown Spider
+item.SpawnLargeBrownSpider.name=Spawn Huge Brown Spider
+item.SpawnGlowSlime.name=Spawn Glow Slime
+item.glowSoup.name=Glowing Stew
+
+tile.sandStalactiteBlock0.name=Sand Pillar
+tile.sandStalactiteBlock1.name=Sand Stalactite
+tile.sandStalactiteBlock2.name=Sand Stalactite
+tile.sandStalactiteBlock3.name=Sand Stalactite
+tile.sandStalactiteBlock4.name=Sand Pillar
+tile.sandStalactiteBlock5.name=Sand Pillar
+tile.sandStalactiteBlock6.name=Sand Stalagmite
+tile.sandStalactiteBlock7.name=Sand Stalactite
+tile.sandStalactiteBlock8.name=Sand Stalagmite
+tile.sandStalactiteBlock9.name=Sand Stalagmite
+tile.sandStalactiteBlock10.name=Sand Stalagmite
+tile.sandStalactiteBlock11.name=Sand Stalactite
+tile.sandStalactiteBlock12.name=Sand Stalagmite
+
+tile.netherStalactiteBlock0.name=Lava Pillar
+tile.netherStalactiteBlock1.name=Lava Stalactite
+tile.netherStalactiteBlock2.name=Lava Stalactite
+tile.netherStalactiteBlock3.name=Lava Stalactite
+tile.netherStalactiteBlock4.name=Lava Pillar
+tile.netherStalactiteBlock5.name=Lava Pillar
+tile.netherStalactiteBlock6.name=Lava Stalagmite
+tile.netherStalactiteBlock7.name=Lava Stalactite
+tile.netherStalactiteBlock8.name=Lava Stalagmite
+tile.netherStalactiteBlock9.name=Lava Stalagmite
+tile.netherStalactiteBlock10.name=Lava Stalagmite
+tile.netherStalactiteBlock11.name=Lava Stalactite
+tile.netherStalactiteBlock12.name=Lava Stalagmite
+
+tile.stoneStalactiteBlock0.name=Stone Pillar
+tile.stoneStalactiteBlock1.name=Stone Stalactite
+tile.stoneStalactiteBlock2.name=Stone Stalactite
+tile.stoneStalactiteBlock3.name=Stone Stalactite
+tile.stoneStalactiteBlock4.name=Stone Pillar
+tile.stoneStalactiteBlock5.name=Stone Pillar
+tile.stoneStalactiteBlock6.name=Stone Stalagmite
+tile.stoneStalactiteBlock7.name=Stone Stalactite
+tile.stoneStalactiteBlock8.name=Stone Stalagmite
+tile.stoneStalactiteBlock9.name=Stone Stalagmite
+tile.stoneStalactiteBlock10.name=Stone Stalagmite
+tile.stoneStalactiteBlock11.name=Stone Stalactite
+tile.stoneStalactiteBlock12.name=Stone Stalagmite
+
+tile.deepslateStalactiteBlock0.name=Deepslate Pillar
+tile.deepslateStalactiteBlock1.name=Deepslate Stalactite
+tile.deepslateStalactiteBlock2.name=Deepslate Stalactite
+tile.deepslateStalactiteBlock3.name=Deepslate Stalactite
+tile.deepslateStalactiteBlock4.name=Deepslate Pillar
+tile.deepslateStalactiteBlock5.name=Deepslate Pillar
+tile.deepslateStalactiteBlock6.name=Deepslate Stalagmite
+tile.deepslateStalactiteBlock7.name=Deepslate Stalactite
+tile.deepslateStalactiteBlock8.name=Deepslate Stalagmite
+tile.deepslateStalactiteBlock9.name=Deepslate Stalagmite
+tile.deepslateStalactiteBlock10.name=Deepslate Stalagmite
+tile.deepslateStalactiteBlock11.name=Deepslate Stalactite
+tile.deepslateStalactiteBlock12.name=Deepslate Stalagmite
+
+tile.icestalactite0.name=Ice Stalactite
+tile.icestalactite1.name=Ice Stalactite
+tile.icestalactite2.name=Ice Stalactite
+
+tile.caveplant0.name=Dead Shrub
+tile.caveplant1.name=Dead Shrub
+tile.caveplant2.name=Glowing Mushroom
+tile.caveplant3.name=Glowing Mushroom
+tile.caveplant4.name=Frost Mushroom
+tile.caveplant5.name=Frost Mushroom
+tile.caveplant6.name=Fiery Flower
+tile.caveplant7.name=Fiery Flower
+
+entity.BrownSpider.name=Brown Spider
+entity.BrownSpiderSmall.name=Small Brown Spider
+entity.BrownSpiderLarge.name=Huge Brown Spider
+entity.GlowSlime.name=Glowing Slime
+
+tile.BlockStalactite.name=Stalactite
+tile.BlockStalagmite.name=Stalagmite
+tile.QuickSnow.name=Quicksnow
+tile.ceilingVine.name=Ceiling Vines
+tile.scorchedStoneBlock.name=Scorched Stone
+tile.scorchedLavaStoneBlock.name=Scorched Lava Stone
+tile.glowLily.name=Glowing Waterlily
+
+itemGroup.caves=Caves

@@ -35,4 +35,8 @@
  */
 dependencies {
     runtimeOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.5.4-GTNH:dev")
+    compileOnly rfg.deobf("curse.maven:immersive-snowgen-545744:3633224")
+    implementation "maven.modrinth:mysteriumlibunofficial:1.3"
+    compileOnly "maven.modrinth:etfuturum:2.6.0_rc-2"
+    accessTransformersFile=file("src/resources/META-INF/immersivecavegen_at")
 }
