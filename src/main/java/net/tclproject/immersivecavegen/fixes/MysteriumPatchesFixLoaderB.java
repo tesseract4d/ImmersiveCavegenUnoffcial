@@ -1,15 +1,15 @@
 package net.tclproject.immersivecavegen.fixes;
 
+import net.tclproject.mysteriumlib.asm.common.CustomLoadingPlugin;
+import net.tclproject.mysteriumlib.asm.common.FirstClassTransformer;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
-import net.tclproject.mysteriumlib.asm.common.CustomLoadingPlugin;
-import net.tclproject.mysteriumlib.asm.common.FirstClassTransformer;
 
 public class MysteriumPatchesFixLoaderB extends CustomLoadingPlugin {
   public String[] getASMTransformerClass() {
-      System.out.println(114514);
     return new String[] { FirstClassTransformer.class.getName() };
   }
 

@@ -1,9 +1,10 @@
 package net.tclproject.immersivecavegen.world;
 
-import net.tclproject.immersivecavegen.blocks.BlockInit;
+
+import net.minecraft.init.Blocks;
 
 public class GenerateNetherStalactites extends GenerateStoneStalactite {
   public GenerateNetherStalactites() {
-    super(BlockInit.netherStalactiteBlock);
+    super(Blocks.netherrack);
   }
 }

@@ -1,15 +1,15 @@
 package net.tclproject.immersivecavegen.fixes;
 
-import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.MapGenRavine;
 import net.tclproject.immersivecavegen.WGConfig;
 import net.tclproject.mysteriumlib.asm.annotations.EnumReturnSetting;
 import net.tclproject.mysteriumlib.asm.annotations.Fix;
+
+import java.util.Random;
 
 public class MysteriumPatchesFixesRavine {
   @Fix(returnSetting = EnumReturnSetting.ON_TRUE)
@@ -138,18 +138,6 @@ public class MysteriumPatchesFixesRavine {
     for (String str : WGConfig.dimblacklist) {
       if (p_151538_1_ != null && String.valueOf(p_151538_1_.provider.dimensionId).equalsIgnoreCase(str))
         return false;
-    }
-    if ((WGConfig.oneBigCave || instance.rand.nextInt(50) == 100) && !WGConfig.turnOffVanillaCaverns) {
-      double d0 = (p_151538_2_ * 16 + instance.rand.nextInt(16));
-      double d1 = (instance.rand.nextInt(instance.rand.nextInt(40) + 8) + 20);
-      double d2 = (p_151538_3_ * 16 + instance.rand.nextInt(16));
-      byte b0 = 1;
-      for (int i1 = 0; i1 < b0; i1++) {
-        float f = instance.rand.nextFloat() * 3.1415927F * 2.0F;
-        float f1 = (instance.rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
-        float f2 = (instance.rand.nextFloat() * 2.0F + instance.rand.nextFloat()) * 2.0F;
-        instance.func_151540_a(instance.rand.nextLong(), p_151538_4_, p_151538_5_, p_151538_6_, d0, d1, d2, f2, f, f1, 0, 0, 3.0D);
-      }
     }
     return true;
   }

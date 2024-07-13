@@ -14,7 +14,6 @@ import cpw.mods.fml.common.network.FMLNetworkEvent;
 import cpw.mods.fml.common.registry.GameData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -29,27 +28,18 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.WorldType;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.client.event.RenderPlayerEvent;
-import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import net.minecraftforge.event.terraingen.InitNoiseGensEvent;
 import net.minecraftforge.event.terraingen.OreGenEvent;
 import net.minecraftforge.event.world.WorldEvent;
-import net.tclproject.immersivecavegen.blocks.BlockInit;
-import net.tclproject.immersivecavegen.entities.EntityBrownSpider;
-import net.tclproject.immersivecavegen.entities.EntityBrownSpiderLarge;
-import net.tclproject.immersivecavegen.entities.EntityBrownSpiderSmall;
-import net.tclproject.immersivecavegen.entities.EntityGlowSlime;
-import net.tclproject.immersivecavegen.entities.EntityInit;
-import net.tclproject.immersivecavegen.items.ItemInit;
-import net.tclproject.immersivecavegen.misc.CraftInit;
 import net.tclproject.immersivecavegen.world.CavesDecorator;
 import net.tclproject.immersivecavegen.world.GenerateStoneStalactite;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.GL11;
+
+import java.util.Random;
 
 @Mod(modid = "immersivecavegen", version = "1.2g-hotfix4", name = "Immersive Cavegen",dependencies = "required-after:MysteriumLib")
 public class ImmersiveCavegen {
@@ -70,15 +60,6 @@ public class ImmersiveCavegen {
   public void preInit(FMLPreInitializationEvent event) {
     this.logger = event.getModLog();
     WGConfig.init(event.getModConfigurationDirectory().toString(), event);
-    if (!WGConfig.serveronly) {
-      BlockInit.init();
-      ItemInit.init();
-      if (WGConfig.enableEntities) {
-        EntityInit.init();
-        if (event.getSide().isClient())
-          EntityInit.clientInit();
-      }
-    }
     instance = this;
     MinecraftForge.EVENT_BUS.register(this);
     FMLCommonHandler.instance().bus().register(this);
@@ -88,9 +69,6 @@ public class ImmersiveCavegen {
 
   @EventHandler
   public void init(FMLInitializationEvent event) {
-    if (!WGConfig.serveronly) {
-      CraftInit.init();
-    }
     String[] list = "netherrack,stone,grass,dirt,cobblestone,gravel,gold_ore,iron_ore,coal_ore,lapis_ore,sandstone,diamond_ore,redstone_ore,lit_redstone_ore,ice,snow,clay,monster_egg,emerald_ore".split(",");
     String[] arr$ = list;
     int len = list.length;
@@ -236,33 +214,5 @@ public class ImmersiveCavegen {
   @SubscribeEvent
   public void onFMLNetworkLeave(FMLNetworkEvent.ServerConnectionFromClientEvent event) {
     WGConfig.loadConfiguration();
-  }
-
-  @SubscribeEvent
-  public void entitySpawnEvent(LivingSpawnEvent.CheckSpawn event) {
-    //this;
-    if (!WGConfig.serveronly && event.world.provider.terrainType != WorldType.FLAT && event.y < 34.0F && WGConfig.enableEntities && event.getResult() != Event.Result.DENY && !(event.entity instanceof net.tclproject.immersivecavegen.entities.ICaveEntity) && rand.nextInt(WGConfig.mobSpawnChance) == 0 && event.world.getBlockLightValue((int)event.x, (int)event.y, (int)event.z) <= rand.nextInt(8)) {
-      BiomeGenBase biome = event.world.getBiomeGenForCoords((int)event.x, (int)event.z);
-      if (BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.MUSHROOM) || BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.JUNGLE) || BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.DENSE)) {
-        EntityGlowSlime entityToSpawn = new EntityGlowSlime(event.world);
-        entityToSpawn.setLocationAndAngles(event.x, event.y, event.z, rand.nextFloat() * 360.0F, 0.0F);
-        event.world.spawnEntityInWorld((Entity)entityToSpawn);
-      } else if (!BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.NETHER) && !BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.END)) {
-        float randomValue = rand.nextFloat();
-        if (randomValue < 0.5D) {
-          EntityBrownSpiderSmall entityToSpawn = new EntityBrownSpiderSmall(event.world);
-          entityToSpawn.setLocationAndAngles(event.x, event.y, event.z, rand.nextFloat() * 360.0F, 0.0F);
-          event.world.spawnEntityInWorld((Entity)entityToSpawn);
-        } else if (randomValue < 0.83D) {
-          EntityBrownSpider entityToSpawn = new EntityBrownSpider(event.world);
-          entityToSpawn.setLocationAndAngles(event.x, event.y, event.z, rand.nextFloat() * 360.0F, 0.0F);
-          event.world.spawnEntityInWorld((Entity)entityToSpawn);
-        } else {
-          EntityBrownSpiderLarge entityToSpawn = new EntityBrownSpiderLarge(event.world);
-          entityToSpawn.setLocationAndAngles(event.x, event.y, event.z, rand.nextFloat() * 360.0F, 0.0F);
-          event.world.spawnEntityInWorld((Entity)entityToSpawn);
-        }
-      }
-    }
   }
 }

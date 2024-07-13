@@ -4,21 +4,20 @@ import cpw.mods.fml.common.Optional.Method;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import ganymedes01.etfuturum.configuration.configs.ConfigWorld;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockHugeMushroom;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntitySkull;
 import net.minecraft.util.Direction;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.tclproject.immersivecavegen.WGConfig;
-import net.tclproject.immersivecavegen.blocks.BlockInit;
-import net.tclproject.immersivecavegen.world.biomes.caves.*;
 import net.tclproject.immersivecavegen.fixes.MysteriumPatchesFixesCave;
+import net.tclproject.immersivecavegen.world.biomes.caves.*;
 
 import java.util.Arrays;
 import java.util.IdentityHashMap;
@@ -26,13 +25,13 @@ import java.util.List;
 import java.util.Random;
 
 public class CavesDecorator {
-  public static List freezable = Arrays.asList(new Block[] { Blocks.stone, Blocks.dirt, Blocks.gravel, (Block)Blocks.grass });
+  public static List freezable = Arrays.asList(Blocks.stone, Blocks.dirt, Blocks.gravel, Blocks.grass);
 
   public static int maxGenHeight = 80;
 
   public static int maxLength = 8;
 
-  private static int timesPerChunck = 50;
+  private static final int timesPerChunck = 50;
 
   private static final GenerateJungleCaves jungleGen = new GenerateJungleCaves();
 
@@ -189,8 +188,7 @@ public class CavesDecorator {
     if (vary != 0)
       y = y - vary + 1;
     if (world.getBlock(x, y - 1, z).isNormalCube() && WGConfig.waterCaves) {
-      world.setBlock(x, y, z, (Block)Blocks.flowing_water, 0, 3);
-      return;
+      world.setBlock(x, y, z, Blocks.flowing_water, 0, 3);
     }
   }
 
@@ -223,8 +221,8 @@ public class CavesDecorator {
     if (vary != 0)
       y = y - vary + 1;
     if (world.getBlock(x, y - 1, z).isOpaqueCube()) {
-      int glowcapNum = randomChoice(new int[] { 0, 1, 2, 3 });
-      world.setBlock(x, y, z, BlockInit.cavePlantBlock, glowcapNum, 3);
+      int glowcapNum = randomChoice(0, 1, 2, 3);
+      world.setBlock(x, y, z, Blocks.brown_mushroom, glowcapNum, 3);
       return true;
     }
     return false;
@@ -235,8 +233,8 @@ public class CavesDecorator {
     if (vary != 0)
       y = y - vary + 1;
     if (world.getBlock(x, y - 1, z).isOpaqueCube()) {
-      int glowcapNum = randomChoice(new int[] { 0, 1 });
-      world.setBlock(x, y, z, (glowcapNum == 0) ? (Block)Blocks.brown_mushroom : (Block)Blocks.red_mushroom, 0, 2);
+      int glowcapNum = randomChoice(0, 1);
+      world.setBlock(x, y, z, (glowcapNum == 0) ? Blocks.brown_mushroom : Blocks.red_mushroom, 0, 2);
       return true;
     }
     return false;
@@ -278,7 +276,7 @@ public class CavesDecorator {
             Block aux = world.getBlock(newX + j, newY - i, newZ + k);
             if (freezable.contains(aux))
               if (world.isAirBlock(newX + j, newY - i + 1, newZ + k)) {
-                world.setBlock(newX + j, newY - i, newZ + k, (Block)Blocks.grass, 0, 2);
+                world.setBlock(newX + j, newY - i, newZ + k, Blocks.grass, 0, 2);
                 if (random.nextFloat() > 0.66F) {
                   Block b;
                   int selection = randomChoice(0, 1, 2, 3, 4, 5);
@@ -329,15 +327,15 @@ public class CavesDecorator {
             if (random.nextFloat() > 0.85D) {
               safeSetblock(world, x, y + 4, z, Blocks.log, 0, 2);
               surroundByLeaves(world, x, y + 4, z);
-              safeSetblock(world, x, y + 5, z, (Block)Blocks.leaves, 0, 2);
+              safeSetblock(world, x, y + 5, z, Blocks.leaves, 0, 2);
             } else {
-              safeSetblock(world, x, y + 4, z, (Block)Blocks.leaves, 0, 2);
+              safeSetblock(world, x, y + 4, z, Blocks.leaves, 0, 2);
             }
           } else {
-            safeSetblock(world, x, y + 3, z, (Block)Blocks.leaves, 0, 2);
+            safeSetblock(world, x, y + 3, z, Blocks.leaves, 0, 2);
           }
         } else {
-          safeSetblock(world, x, y + 2, z, (Block)Blocks.leaves, 0, 2);
+          safeSetblock(world, x, y + 2, z, Blocks.leaves, 0, 2);
         }
       }
       return true;
@@ -346,14 +344,14 @@ public class CavesDecorator {
   }
 
   public static void surroundByLeaves(World world, int x, int y, int z) {
-    safeSetblock(world, x + 1, y, z, (Block)Blocks.leaves, 0, 2);
-    safeSetblock(world, x - 1, y, z, (Block)Blocks.leaves, 0, 2);
-    safeSetblock(world, x, y, z - 1, (Block)Blocks.leaves, 0, 2);
-    safeSetblock(world, x, y, z + 1, (Block)Blocks.leaves, 0, 2);
+    safeSetblock(world, x + 1, y, z, Blocks.leaves, 0, 2);
+    safeSetblock(world, x - 1, y, z, Blocks.leaves, 0, 2);
+    safeSetblock(world, x, y, z - 1, Blocks.leaves, 0, 2);
+    safeSetblock(world, x, y, z + 1, Blocks.leaves, 0, 2);
   }
 
   public static void safeSetblock(World world, int x, int y, int z, Block b, int meta, int flags) {
-    if (world.getBlock(x, y, z).canBeReplacedByLeaves((IBlockAccess)world, x, y, z))
+    if (world.getBlock(x, y, z).canBeReplacedByLeaves(world, x, y, z))
       world.setBlock(x, y, z, b, meta, flags);
   }
 
@@ -364,7 +362,7 @@ public class CavesDecorator {
     if (!world.isAirBlock(x, y - 1, z)) {
       if (!world.getBlock(x, y, z).getMaterial().isLiquid()) {
         world.setBlock(x, y - 1, z, Blocks.ice, 0, 2);
-        world.setBlock(x, y, z, BlockInit.cavePlantBlock, randomChoice(0, 1, 4, 5), 3);
+        world.setBlock(x, y, z, Blocks.brown_mushroom, randomChoice(0, 1, 4, 5), 3);
       }
       convertToFrozenType(world, random, x, y, z);
     }
@@ -376,8 +374,8 @@ public class CavesDecorator {
       y = y - vary + 1;
     if (!world.isAirBlock(x, y - 1, z)) {
       if (!world.getBlock(x, y, z).getMaterial().isLiquid()) {
-        world.setBlock(x, y - 1, z, BlockInit.scorchedStone, 0, 2);
-        world.setBlock(x, y, z, BlockInit.cavePlantBlock, randomChoice(0, 1, 6, 7), 3);
+        world.setBlock(x, y - 1, z, Blocks.netherrack, 0, 2);
+        world.setBlock(x, y, z, Blocks.red_mushroom, randomChoice(0, 1, 6, 7), 3);
       }
       convertToLavaType(world, random, x, y, z);
     }
@@ -385,7 +383,7 @@ public class CavesDecorator {
 
   public static void generateIcicles(World world, Random random, int x, int y, int z, int distance) {
     world.setBlock(x, y + 1, z, Blocks.ice, 0, 2);
-    world.setBlock(x, y, z, BlockInit.iceStalactiteBlock, randomChoice(0, 1, 2), 3);
+    world.setBlock(x, y, z, Blocks.packed_ice, randomChoice(0, 1, 2), 3);
     convertToFrozenType(world, random, x, y, z);
     int botY = y - distance + 1;
     if (distance != 0 && !world.getBlock(x, botY, z).getMaterial().isLiquid())
@@ -411,9 +409,9 @@ public class CavesDecorator {
             for (int l1 = p_76484_5_ - b0; l1 <= p_76484_5_ + b0 && flag; l1++) {
               if (j1 >= 0 && j1 < 256) {
                 Block block = p_76484_1_.getBlock(i, j1, l1);
-                if (!block.isAir((IBlockAccess)p_76484_1_, i, j1, l1) && !block.isLeaves((IBlockAccess)p_76484_1_, i, j1, l1))
+                if (!block.isAir(p_76484_1_, i, j1, l1) && !block.isLeaves(p_76484_1_, i, j1, l1))
                   flag = true;
-                if (block instanceof net.tclproject.immersivecavegen.blocks.BlockHugeGlowingMushroom || block instanceof net.tclproject.immersivecavegen.blocks.BlockHugeGlowingMushroom2)
+                if (block instanceof BlockHugeMushroom)
                   flag = false;
               } else {
                 flag = true;
@@ -469,20 +467,19 @@ public class CavesDecorator {
               }
               if (j2 == 5 && k1 < p_76484_4_ + i1)
                 j2 = 0;
-              if ((j2 != 0 || p_76484_4_ >= p_76484_4_ + i1 - 1) && p_76484_1_.getBlock(l2, k1, i2).canBeReplacedByLeaves((IBlockAccess)p_76484_1_, l2, k1, i2))
-                p_76484_1_.setBlock(l2, k1, i2, stone ? Blocks.stone : ((l == 0) ? BlockInit.mushroomBlockBlue : BlockInit.mushroomBlockGreen), j2, 2);
+              if ((j2 != 0 || p_76484_4_ >= p_76484_4_ + i1 - 1) && p_76484_1_.getBlock(l2, k1, i2).canBeReplacedByLeaves(p_76484_1_, l2, k1, i2))
+                p_76484_1_.setBlock(l2, k1, i2, stone ? Blocks.stone : ((l == 0) ? Blocks.red_mushroom_block : Blocks.brown_mushroom_block), j2, 2);
               continue;
             }
           }
         }
         for (k1 = 0; k1 < i1; k1++) {
           Block block2 = p_76484_1_.getBlock(p_76484_3_, p_76484_4_ + k1, p_76484_5_);
-          if (block2.canBeReplacedByLeaves((IBlockAccess)p_76484_1_, p_76484_3_, p_76484_4_ + k1, p_76484_5_))
-            p_76484_1_.setBlock(p_76484_3_, p_76484_4_ + k1, p_76484_5_, stone ? Blocks.stone : ((l == 0) ? BlockInit.mushroomBlockBlue : BlockInit.mushroomBlockGreen), 10, 2);
+          if (block2.canBeReplacedByLeaves(p_76484_1_, p_76484_3_, p_76484_4_ + k1, p_76484_5_))
+            p_76484_1_.setBlock(p_76484_3_, p_76484_4_ + k1, p_76484_5_, stone ? Blocks.stone : ((l == 0) ? Blocks.red_mushroom_block : Blocks.brown_mushroom_block), 10, 2);
         }
         return;
       }
-      return;
     }
   }
 
@@ -500,7 +497,7 @@ public class CavesDecorator {
 
   public static void generateGlowLily(World world, Random random, int x, int y, int z, int numEmptyBlocks) {
     if (isGoodForLily(world, x, y - numEmptyBlocks, z))
-      world.setBlock(x, y - numEmptyBlocks + 1, z, (random.nextFloat() > 0.5F) ? BlockInit.glowLily : BlockInit.glowLilyBlue, 0, 2);
+      world.setBlock(x, y - numEmptyBlocks + 1, z, Blocks.waterlily, 0, 2);
   }
 
   public static void generateLily(World world, Random random, int x, int y, int z, int numEmptyBlocks) {
@@ -568,7 +565,7 @@ public class CavesDecorator {
           if (weightedChoice(0.8F, 0.2F, 0.0F, 0.0F, 0.0F, 0.0F) == 1) {
             Block aux = world.getBlock(newX + j, newY - i, newZ + k);
             if (freezable.contains(aux) && !world.isAirBlock(newX + j, newY - i + 1, newZ + k))
-              world.setBlock(newX + j, newY - i, newZ + k, BlockInit.scorchedStone, 0, 2);
+              world.setBlock(newX + j, newY - i, newZ + k, Blocks.netherrack, 0, 2);
           }
         }
       }
@@ -613,9 +610,9 @@ public class CavesDecorator {
 
   public static void generateScorchedLavaStone(World world, Random random, int x, int y, int z, int distance) {
     if (world.getBlock(x, y - 1, z).isNormalCube()) {
-      world.setBlock(x, y - 1, z, BlockInit.scorchedLavaStone);
+      world.setBlock(x, y - 1, z, Blocks.nether_brick);
     } else if (world.getBlock(x, y - distance, z).isNormalCube()) {
-      world.setBlock(x, y - distance, z, BlockInit.scorchedLavaStone);
+      world.setBlock(x, y - distance, z, Blocks.nether_brick);
     }
   }
 }
